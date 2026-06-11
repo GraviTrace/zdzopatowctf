@@ -133,11 +133,12 @@
             opacity: 1;
         }
 
-        footer {
-            margin-top: 30px;
-            font-size: 12px;
-            color: #bdc3c7;
-            text-align: center;
+        .screenshot-notice {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: normal;
+            display: block;
         }
     </style>
 </head>
@@ -167,9 +168,10 @@
 
         <section class="riddle-section">
             <div class="riddle-title">💡 Rozwiąż zagadkę:</div>
-            <input type="text" id="riddleInput" class="riddle-input" placeholder="ukryta wiadomość" autocomplete="off">
+            <input type="text" id="riddleInput" class="riddle-input" placeholder="Ukryta wiadomość" autocomplete="off">
             <div id="infoBox" class="info-box">
-                🎵 W studiu muzycznym trzeba zagrać na gitarze akord patryka.
+                <div>🎵 Znajdź studio muzyczne i zagraj w nim akord, który grał patryk.</div>
+                <span class="screenshot-notice">📸 Warto na wszelki wypadek zrobić screena, że udało Ci się rozwiązać zagadkę!</span>
             </div>
         </section>
     </div>
@@ -181,7 +183,6 @@
         riddleInput.addEventListener('input', (e) => {
             const value = e.target.value.trim().toLowerCase();
             
-            // Obsługujemy wersję z polskimi znakami oraz dla wygody użytkownika bez nich (masło / maslo)
             if (value === 'masło' || value === 'maslo') {
                 infoBox.classList.add('show');
                 riddleInput.style.borderColor = 'var(--success-color)';
