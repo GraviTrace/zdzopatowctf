@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nietypowa Lekcja w ZDZ Opatów</title>
+    <style>
+        :root {
+            --bg-color: #faf6f0;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #e67e22;
+            --border-color: #dcd6cd;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --success-color: #27ae60;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            border-bottom: 2px solid #f2ece4;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #1a252f;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        .dialogue {
+            background-color: #fdfaf6;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .riddle-section {
+            margin-top: 40px;
+            border-top: 2px dashed #e2d9cd;
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .riddle-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        .riddle-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            outline: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .riddle-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px rgba(230, 126, 34, 0.15);
+        }
+
+        .info-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #ebf7ee;
+            border: 1px solid #c3e6cb;
+            border-radius: 12px;
+            color: var(--success-color);
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            display: none;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.08);
+        }
+
+        .info-box.show {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #bdc3c7;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Nietypowa Lekcja w ZDZ Opatów</h1>
+            <div class="subtitle">Historia Klasy 3</div>
+        </header>
+
+        <main>
+            <p>Pewnego dnia w ZDZ Opatów pierwsza lekcja klasy 3 zaczęła się dość nietypowo. W drzwiach stanęła pani dyrektor z zamiarem zawołania Karola, aby ten nagrał kolejnego TikToka ze słynnym „siemaneczko”. Zamiast go jednak zawołać, zobaczyła coś okropnego. Ktoś rozlał napój i na ścianach wszędzie były plamy, z których jedna przypominała literkę M. Nikt do tej pory nie wie, który uczeń i w jaki sposób to zrobił. Wiadomo jednak, że po krótkiej rozmowie Karol wraz ze swoją ekipą wyszli z sali i zaczęli szukać pomysłów.</p>
+
+            <p>Szukali, szukali i szukali, aż nagle Patryk wpadł na pomysł. Nikomu nic nie powiedział, tylko skoczył szybko po gitarę. Następnie zaczął grać w kółko jeden akord: A. W końcu zniecierpliwieni koledzy zaczęli go dopytywać:</p>
+
+            <div class="dialogue">
+                — Patryk, no i co w końcu? Powiesz coś wreszcie, Boże, kiedyś?
+            </div>
+
+            <p>Na co on odpowiedział, że w sumie to po prostu chciał sobie pograć, bo uznał, że i tak nic mądrego nie wymyśli.</p>
+
+            <p>Nagle Fabian wkurzył się, podbiegł i szarpnął za gitarę, przez co pękła struna. Zwisała teraz smętnie, układając się w kształt litery S. W końcu ktoś musiał ich uspokoić, więc Adam wbił się pomiędzy nich i odsunął ich od siebie. Gdy tak stał z rozłożonymi rękami, z perspektywy Karola wyglądał dokładnie jak litera Ł.</p>
+
+            <p>Na koniec chłopaki w końcu wymyślili, jakiego TikToka nagrają. Niestety, kiedy zaczęli opowiadać swój pomysł, okazał się on tak potwornie nudny, że Patryk – jak to ma w zwyczaju – po prostu zasnął. Po chwili było słychać już tylko jego chrapanie. Na dodatek usnął z otwartą buzią; gdyby chcieć narysować wtedy jego twarz, wyszłaby kropka, kropka, a zamiast ust – jedno duże „O”.</p>
+        </main>
+
+        <section class="riddle-section">
+            <div class="riddle-title">💡 Rozwiąż zagadkę:</div>
+            <input type="text" id="riddleInput" class="riddle-input" placeholder="ukryta wiadomość" autocomplete="off">
+            <div id="infoBox" class="info-box">
+                🎵 W studiu muzycznym trzeba zagrać na gitarze akord patryka.
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const riddleInput = document.getElementById('riddleInput');
+        const infoBox = document.getElementById('infoBox');
+
+        riddleInput.addEventListener('input', (e) => {
+            const value = e.target.value.trim().toLowerCase();
+            
+            // Obsługujemy wersję z polskimi znakami oraz dla wygody użytkownika bez nich (masło / maslo)
+            if (value === 'masło' || value === 'maslo') {
+                infoBox.classList.add('show');
+                riddleInput.style.borderColor = 'var(--success-color)';
+            } else {
+                infoBox.classList.remove('show');
+                riddleInput.style.borderColor = '';
+            }
+        });
+    </script>
+</body>
+</html>
