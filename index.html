@@ -401,10 +401,10 @@
           </div>
           <div class="admin-content" id="adminGranted" hidden>
             <div class="admin-icon is-authorized" aria-hidden="true">✳</div>
-            <div class="card-kicker">Uprawnienia administratora potwierdzone</div>
-            <h2>Panel otwarty.</h2>
-            <p>Gratulacje — flaga to.</p>
-            <div class="flag-box">ZDZ{sup3rt4jnehaslo123-j3st-trudnym-h4slem}</div>
+            <div class="card-kicker">Weryfikacja backendu</div>
+            <h2 id="adminHeading">Sprawdzam dostęp.</h2>
+            <p id="adminStatus" aria-live="polite">Kontaktuję się z serwerem.</p>
+            <div class="flag-box" id="adminFlag" hidden></div>
           </div>
         </section>
       </section>
@@ -444,6 +444,7 @@
       const PASSWORD = "supertajnehasło123";
       const COOKIE_NAME = "ctf_auth";
       const CONSENT_KEY = "gravitrace_cookie_consent";
+      const ADMIN_API_URL = "https://gravitrace-ctf-api.karol-rejak.workers.dev/api/admin";
       const consentOverlay = document.getElementById("consentOverlay");
       const acceptConsentButton = document.getElementById("acceptConsent");
       const loginView = document.getElementById("loginView");
@@ -460,6 +461,9 @@
       const adminPanel = document.getElementById("adminPanel");
       const adminDenied = document.getElementById("adminDenied");
       const adminGranted = document.getElementById("adminGranted");
+      const adminHeading = document.getElementById("adminHeading");
+      const adminStatus = document.getElementById("adminStatus");
+      const adminFlag = document.getElementById("adminFlag");
 
       function getCookie(name) {
         const prefix = `${name}=`;
@@ -506,6 +510,54 @@
         selectTab("welcome");
       }
 
+      async function loadAdminPanel() {
+        const session = readSession();
+        const hasAdminClaim = Boolean(session && session.isAdmin === true);
+
+        adminFlag.hidden = true;
+        adminFlag.textContent = "";
+        adminHeading.textContent = "Sprawdzam dostęp.";
+        adminStatus.textContent = "Kontaktuję się z serwerem.";
+        adminDenied.hidden = hasAdminClaim;
+        adminGranted.hidden = !hasAdminClaim;
+
+        if (!hasAdminClaim) return;
+
+        if (ADMIN_API_URL.includes("YOUR-WORKER") || ADMIN_API_URL.includes("YOUR-SUBDOMAIN")) {
+          adminHeading.textContent = "Backend nie jest skonfigurowany.";
+          adminStatus.textContent = "Wstaw adres Workera do ustawienia ADMIN_API_URL po jego wdrożeniu.";
+          return;
+        }
+
+        try {
+          const response = await fetch(ADMIN_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cookie: getCookie(COOKIE_NAME) })
+          });
+
+          if (response.status === 403) {
+            adminDenied.hidden = false;
+            adminGranted.hidden = true;
+            return;
+          }
+          if (!response.ok) throw new Error("Backend request failed");
+
+          const result = await response.json();
+          if (!result || typeof result.flag !== "string" || !result.flag) {
+            throw new Error("Backend returned an invalid response");
+          }
+
+          adminHeading.textContent = "Panel otwarty.";
+          adminStatus.textContent = "Backend potwierdził dostęp.";
+          adminFlag.textContent = result.flag;
+          adminFlag.hidden = false;
+        } catch (_error) {
+          adminHeading.textContent = "Backend niedostępny.";
+          adminStatus.textContent = "Nie udało się pobrać flagi. Sprawdź adres API i konfigurację CORS.";
+        }
+      }
+
       function selectTab(tabName) {
         const isAdminTab = tabName === "admin";
         welcomeTab.setAttribute("aria-selected", String(!isAdminTab));
@@ -513,12 +565,7 @@
         welcomePanel.hidden = isAdminTab;
         adminPanel.hidden = !isAdminTab;
 
-        if (isAdminTab) {
-          const session = readSession();
-          const hasAdminAccess = Boolean(session && session.isAdmin === true);
-          adminDenied.hidden = hasAdminAccess;
-          adminGranted.hidden = !hasAdminAccess;
-        }
+        if (isAdminTab) void loadAdminPanel();
       }
 
       acceptConsentButton.addEventListener("click", () => {
